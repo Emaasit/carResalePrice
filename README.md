@@ -12,7 +12,7 @@ Source:
     Journal of Statistics Education, Vol. 16, 
     <http://www.amstat.org/publications/jse/v16n3/datasets.kuiper.html>.
 
-I have a developed a shiny app that creates a multivariate linear regression model 
+I have developed a shiny app that creates a multivariate linear regression model 
 using the caret's cars data set. This model can be used predict the resale price of a car 
 based a variety of characteristics. Accompanying the shiny app is an Rstudio presentation that explains this project.  
 

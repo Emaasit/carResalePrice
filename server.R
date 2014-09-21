@@ -19,7 +19,9 @@ shinyServer(
                 
                 ## Add the documentation for the app
                 output$readme <- renderText({
-                        "This app creates a multivariate linear regression model using the caret's cars data set. The model created is used to predict the resale price of a car based upon user's inputs in the left panel. 
+                        "This app creates a multivariate linear regression model 
+using the caret's cars data set. The model created is used to predict the resale price of a car 
+based upon user's inputs in the left panel. 
                         
                         Input Parameters:
                         Mileage: number of miles the car has been driven
