@@ -2,7 +2,7 @@ carResalePrice
 ===========
 
 
-##Effectiveness of Insect Sprays
+##Prediction of the Resale Price of Cars
 
 Data collected from **Kelly Blue Book** for several hundred 2005 used **General Motors (GM)** cars allows the development a multivariate regression model to determine car values based on a variety of characteristics such as mileage, make, model, engine size, interior style, and cruise control.
 
