@@ -1,6 +1,6 @@
 library(shiny)
 shinyUI(pageWithSidebar(
-        headerPanel("Prediction of Car's Price on Caret's cars dataset"),
+        headerPanel("Prediction of the Resale Price of Cars Using Caret's cars dataset"),
         sidebarPanel(
                 h3("Input paramaters"),
                 sliderInput('mileage', 'Mileage', min=200, max=51000, step = 100, value = 250),
