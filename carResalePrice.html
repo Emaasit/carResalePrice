@@ -794,7 +794,18 @@ hljs.initHighlightingOnLoad();
 <section data-transition="linear" data-transition-speed="default">
 <h3>Introduction</h3>
 <div class="slideContent" >
-<p>Data collected from <strong>Kelly Blue Book</strong> for several hundred 2005 used <strong>General Motors (GM)</strong> cars allows the development a multivariate regression model to determine car values based on a variety of characteristics such as mileage, make, model, engine size, interior style, and cruise control.  </p>
+<ul>
+<li>Data collected from <strong>Kelly Blue Book</strong> for several hundred 2005 used <strong>General Motors (GM)</strong> cars allows the development a multivariate regression model to determine car values based on a variety of characteristics such as:<br/>
+
+<ul>
+<li>mileage, </li>
+<li>make, </li>
+<li>model, </li>
+<li>engine size, </li>
+<li>interior style, and </li>
+<li>cruise control.<br/></li>
+</ul></li>
+</ul>
 
 </div>
 
@@ -804,7 +815,7 @@ hljs.initHighlightingOnLoad();
 <div class="slideContent" >
 <ul>
 <li>To developed a shiny app that creates a multivariate linear regression model using the caret&#39;s cars data set.<br/></li>
-<li>This model can be used predict the resale price of a car based a variety of characteristics.<br/></li>
+<li>This model can be used predict the resale price of a car based on a variety of characteristics.<br/></li>
 <li>The shiny app can be accessed using the link below.<br/>
 
 <ul>
@@ -816,30 +827,32 @@ hljs.initHighlightingOnLoad();
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Fourth Slide</h3>
+<h3>Code</h3>
 <div class="slideContent" >
-<p>For more details on authoring R presentations click the
-<strong>Help</strong> button on the toolbar.</p>
-
 <ul>
-<li>Bullet 1</li>
-<li>Bullet 2</li>
-<li>Bullet 3<br/></li>
+<li>The following R expression was evaluated and displayed the predicted value.</li>
 </ul>
+
+<pre><code>library(caret)
+data(cars)
+
+fit &lt;- lm(Price ~ Mileage+Cylinder+Doors+Leather+Buick+Cadillac+
+Pontiac+Saab+convertible+hatchback+sedan, data=cars)
+
+summary(fit)
+</code></pre>
 
 </div>
 
 </section>
 <section data-transition="linear" data-transition-speed="default">
-<h3>Fifth Slide</h3>
+<h3>Pitch and Conclusion</h3>
 <div class="slideContent" >
-<p>For more details on authoring R presentations click the
-<strong>Help</strong> button on the toolbar.</p>
-
 <ul>
-<li>Bullet 1</li>
-<li>Bullet 2</li>
-<li>Bullet 3</li>
+<li><p>By using this shiny app, users are able to quickly determine the resale price of their cars
+without the hustle of developing a prediction algorithm.  </p></li>
+<li><p>Users can simply select the explanatory variables and click the predict button to display
+the predicted resale value.  </p></li>
 </ul>
 
 </div>
