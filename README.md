@@ -14,7 +14,7 @@ Source:
 
 I have developed a shiny app that creates a multivariate linear regression model 
 using the caret's cars data set. This model can be used predict the resale price of a car 
-based a variety of characteristics. Accompanying the shiny app is an Rstudio presentation that explains this project.  
+based on a variety of characteristics. Accompanying the shiny app is an Rstudio presentation that explains this project.  
 
 - <http://emaasit.shinyapps.io/carResalePrice>  
 - <http://emaasit.github.io/carResalePrice/carResalePrice.html#/>
