@@ -17,4 +17,4 @@ using the caret's cars data set. This model can be used predict the resale price
 based a variety of characteristics. Accompanying the shiny app is an Rstudio presentation that explains this project.  
 
 - <http://emaasit.shinyapps.io/carResalePrice>  
-- <http://rpubs.com/emaasit/26593>
+- <http://emaasit.github.io/carResalePrice/carResalePrice.html#/>

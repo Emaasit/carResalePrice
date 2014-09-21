@@ -1,9 +1,33 @@
-carResalePrice
+Resale Price of Cars
 ========================================================
 author: Daniel Emaasit
 date: September 21, 2014
 
-First Slide
+
+Introduction
+========================================================
+
+Data collected from **Kelly Blue Book** for several hundred 2005 used **General Motors (GM)** cars allows the development a multivariate regression model to determine car values based on a variety of characteristics such as mileage, make, model, engine size, interior style, and cruise control.  
+
+Objective
+========================================================
+
+- To developed a shiny app that creates a multivariate linear regression model using the caret's cars data set.   
+- This model can be used predict the resale price of a car based a variety of characteristics.   
+- The shiny app can be accessed using the link below.  
+    + <http://emaasit.shinyapps.io/carResalePrice>
+
+Fourth Slide
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3  
+
+Fifth Slide
 ========================================================
 
 For more details on authoring R presentations click the
@@ -12,17 +36,3 @@ For more details on authoring R presentations click the
 - Bullet 1
 - Bullet 2
 - Bullet 3
-
-Slide With Code
-========================================================
-
-```{r}
-summary(cars)
-```
-
-Slide With Plot
-========================================================
-
-```{r, echo=FALSE}
-plot(cars)
-```
