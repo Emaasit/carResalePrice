@@ -1,44 +1,98 @@
 library(shiny)
-library(ggplot2)
-
-data(faithful)
-fit <- lm(eruptions ~ waiting, data=faithful)
-
-duration <- function (waiting=65, level=.95) {
-        predict(fit, data.frame(waiting), interval="predict", level=level)
-}
-
+par(mfrow = c(2,2))
 shinyServer(
-        
-        function(input, output) {
-                results <- reactive({duration(waiting = input$waittime, level = input$level)})
+        function(input, output){
+                #Load datasets
+                library(caret)
+                data(cars)
                 
-                output$owaittime <- renderPrint({input$waittime})
-                output$olevel    <- renderPrint({input$level})
+                ## Create the optimum multivariate linear model
+                fit <- lm(Price ~ Mileage+Cylinder+Doors+Leather+Buick+Cadillac+Pontiac+Saab+convertible+hatchback+sedan, data=cars)
                 
-                output$reveal    <- renderText({
-                        paste("Since it's been ", input$waittime, " minutes since the geyser erupted. We are ", input$level*100, 
-                              "% confident that Old Faithful will erupt for between ", round(results()[2], digits=2), 
-                              " and ", round(results()[3], digits=2), " minutes this time, the average time being ", 
-                              round(results()[1], digits=2), " minutes.", sep="")
+                ## Render summary of model created
+                output$summary <- renderPrint({summary(fit)})
+                
+                ## Render model plots 
+                output$plot <- renderPlot({
+                        par(mfrow = c(2,2))
+                        plot(fit)})
+                
+                ## Add the documentation for the app
+                output$readme <- renderText({
+                        "This app creates a multivariate linear regression model using the caret's cars data set. The model created is used to predict the resale price of a car based upon user's inputs in the left panel. 
+                        
+                        Input Parameters:
+                        Mileage: number of miles the car has been driven
+                        Cylinder: number of cylinders in the engine        
+                        Doors: number of doors        
+                        Leather: indicator variable representing whether the car has leather seats (1 = leather)
+                        Make: manufacturer of the car such as Saturn, Pontiac, and Chevrolet
+                        Type: body type such as sedan, coupe, etc."
                 })
-                output$duration  <- renderPrint({results()[1]})
-                output$low       <- renderPrint({results()[2]})
-                output$high      <- renderPrint({results()[3]})
                 
-                boxPlot <- function() {
-                        sdf <- data.frame(duration = results()[1:3], ind = c('A1','A2','A3'), group = rep('',3), obs=1:3)
-                        plot1 <- ggplot(sdf, aes(x="", y=duration, fill="")) + geom_boxplot(notch=F) + coord_flip() + ylim(c(-2.5, 14.3)) +
-                                ylab("eruption duration in minutes") + xlab(NULL) + guides(fill=FALSE) +
-                                scale_fill_manual(values=c("#56A8E1")) + theme_bw();
-                        print(plot1)
+                ## Extract user inputs from ui.R and preidict the price usinf the
+                ## regression model generated above
+                output$prediction <- renderText({ 
+                        input$predictprice
+                        isolate({
+                                mileage <- as.integer(input$mileage); 
+                                cyl <- as.integer(input$cyl)
+                                doors <- as.integer(input$doors)
+                                leather <- input$leather
+                                make <- input$make
+                                type <- input$type
+                                
+                                if(leather == 'Yes'){
+                                        leather =1
+                                } else {
+                                        leather = 0
+                                }
+                                buick <- 0
+                                cadillac <- 0
+                                pontiac <- 0
+                                saab=0
+                                if(make == 'Buick')
+                                        buick <- 1
+                                else if (make == 'Cadillac')
+                                        cadillac <- 1
+                                else if (make == 'Pontiac')
+                                        pontiac <- 1
+                                else if (make == 'Saab')
+                                        saab <- 1
+                                
+                                conv <- 0
+                                hb <- 0
+                                sedan <- 0
+                                if(type == 'convertible')
+                                        conv <- 1
+                                else if(type == 'hatchback')
+                                        hb <- 1
+                                else if (type == 'sedan')
+                                        sedan = 1 
+                                
+                                newData <- data.frame(Mileage=mileage, 
+                                                      Cylinder= cyl,
+                                                      Doors = doors,
+                                                      Cruise = 0,
+                                                      Sound = 0,
+                                                      Leather = leather,
+                                                      Buick = buick,
+                                                      Cadillac = cadillac,
+                                                      Chevy=0,
+                                                      Pontiac = pontiac,
+                                                      Saab = saab,
+                                                      Saturn=0,
+                                                      convertible = conv,
+                                                      coupe = 0,
+                                                      hatchback = hb,
+                                                      sedan = sedan,
+                                                      wagon=0)
+                                
+                                predict(fit, newData)
+                        })
+                })
+                
+                
+                
                 }
-                
-                output$myplot <- renderPlot({
-                        boxPlot()
-                })
-                
-                #output$myplot    <- renderPlot({boxplot(results()[1:3], horizontal=T, ylim=c(-2.5,14.3), varwidth=T)})
-                
-        }
-)
+                )
